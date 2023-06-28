@@ -21,4 +21,20 @@ RSpec.describe StreamSourceService do
       ]
     end
   end
+
+  describe 'with multiple events in incorrect order' do
+    let(:input) do
+      [
+        { "event": "cancellation", "account": "C001", "date": "2020-05-18" },
+        { "event": "subscription", "account": "C001", "date": "2020-05-17" }
+      ]
+    end
+
+    it 'returns stream with events set to correct order' do
+      expect(prepared_stream).to match [
+        a_hash_including(event: "subscription"),
+        a_hash_including(event: "cancellation")
+      ]
+    end
+  end
 end
