@@ -1,7 +1,13 @@
 require 'stream_source_service'
 
 RSpec.describe StreamSourceService do
-  it 'example test' do
-    expect(1).to eq(2)
+  subject(:prepared_stream) { described_class.new(input).prepare.provide }
+
+  describe 'with empty input' do
+    let(:input) { [] }
+
+    it 'returns empty array' do
+      expect(prepared_stream).to eq []
+    end
   end
 end
