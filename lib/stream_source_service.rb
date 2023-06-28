@@ -1,0 +1,2 @@
+class StreamSourceService
+end
